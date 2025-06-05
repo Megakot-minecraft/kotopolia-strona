@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>HelpOp Admin Panel</title>
+</head>
+<body>
+    <h1>Panel administratora HelpOp</h1>
+
+    {% if logs %}
+        <ul>
+            {% for log in logs %}
+                <li><strong>{{ log.player }}</strong>: {{ log.message }} <em>({{ log.time }})</em></li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Brak zgłoszeń HelpOp.</p>
+    {% endif %}
+</body>
+</html>
