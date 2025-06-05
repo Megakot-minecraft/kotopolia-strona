@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <title>Kotopolia – Serwer Minecraft</title>
+  <link rel="icon" type="image/png" href="favicon.png">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #1b1b1b;
+      color: #f2f2f2;
+      margin: 0;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    h1, h2 {
+      color: #00ff80;
+    }
+
+    nav {
+      margin-bottom: 2rem;
+    }
+
+    .btn {
+      background: #00ff80;
+      color: #000;
+      padding: 0.6rem 1rem;
+      margin: 0.3rem;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .btn:hover {
+      background: #00cc66;
+    }
+
+    .section, .subsection {
+      display: none;
+      margin: 1rem auto;
+      padding: 1rem;
+      max-width: 600px;
+      background: #2e2e2e;
+      border-radius: 10px;
+      border: 2px solid #00ff80;
+    }
+
+    .visible {
+      display: block;
+    }
+
+    .link {
+      display: inline-block;
+      color: #00ffff;
+      margin: 0.5rem;
+      text-decoration: none;
+    }
+
+    .sub-btn {
+      background: #00ffff;
+      color: #000;
+      margin: 0.2rem;
+      padding: 0.4rem 0.8rem;
+      border-radius: 4px;
+      border: none;
+      cursor: pointer;
+    }
+
+    .sub-btn:hover {
+      background: #00cccc;
+    }
+
+    .logo {
+      width: 150px;
+      margin-bottom: 1rem;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #00ff80;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- LOGO -->
+  <img src="favicon.png" alt="Kotopolia Logo" class="logo">
+  <h1>🌍 Serwer Minecraft – Kotopolia</h1>
+
+  <nav>
+    <button class="btn" onclick="showSection('linki')">🔗 Linki</button>
+    <button class="btn" onclick="showSection('regulamin')">📜 Regulamin</button>
+    <button class="btn" onclick="showSection('tryby')">🎮 Tryby gry</button>
+  </nav>
+
+  <!-- 🔗 LINKI -->
+  <div id="linki" class="section">
+    <h2>🔗 Linki</h2>
+    <a class="link" href="https://discord.gg/TwojDiscord" target="_blank">Dołącz na Discorda</a>
+  </div>
+
+  <!-- 📜 REGULAMIN -->
+  <div id="regulamin" class="section">
+    <h2>📜 Regulamin</h2>
+    <button class="sub-btn" onclick="showSub('reg-dc')">Regulamin Discord</button>
+    <button class="sub-btn" onclick="showSub('reg-survival')">Regulamin Survival</button>
+    <button class="sub-btn" onclick="showSub('reg-boxpvp')">Regulamin BoxPvP</button>
+
+    <div id="reg-dc" class="subsection">
+      <h3>📜 Regulamin Discord</h3>
+      <p>
+        • Zakaz reklam<br>
+        • Zakaz wulgaryzmów<br>
+        • Szanuj innych<br>
+        • Administrator ma zawsze rację
+      </p>
+    </div>
+
+    <div id="reg-survival" class="subsection">
+      <h3>🌲 Regulamin Survival</h3>
+      <p>
+        • Zakaz griefowania<br>
+        • Zakaz cheatowania<br>
+        • Nie buduj zbyt blisko spawn<br>
+        • Handel dozwolony
+      </p>
+    </div>
+
+    <div id="reg-boxpvp" class="subsection">
+      <h3>⚔️ Regulamin BoxPvP</h3>
+      <p>
+        • Dozwolone PvP<br>
+        • Zakaz bugowania areny<br>
+        • Szanuj przeciwników<br>
+        • Zakaz flyhacków
+      </p>
+    </div>
+  </div>
+
+  <!-- 🎮 TRYBY -->
+  <div id="tryby" class="section">
+    <h2>🎮 Tryby gry</h2>
+    <p>
+      • 🌲 <strong>Survival</strong> – klasyczny tryb z ekonomią i ochroną<br>
+      • ⚔️ <strong>BoxPvP</strong> – walcz na arenie PvP z zestawami
+    </p>
+  </div>
+
+  <script>
+    function showSection(id) {
+      document.querySelectorAll('.section').forEach(sec => sec.classList.remove('visible'));
+      document.querySelectorAll('.subsection').forEach(sub => sub.classList.remove('visible'));
+      document.getElementById(id).classList.add('visible');
+    }
+
+    function showSub(id) {
+      document.querySelectorAll('.subsection').forEach(sub => sub.classList.remove('visible'));
+      document.getElementById(id).classList.add('visible');
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <title>Panel Administracji – Helpop</title>
+  <style>
+    body {
+      background: #1a1a1a;
+      color: #fff;
+      font-family: Arial;
+      padding: 2rem;
+    }
+
+    h1 {
+      color: #00ff99;
+    }
+
+    .ticket {
+      background: #2e2e2e;
+      border-left: 5px solid #00ff99;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      border-radius: 8px;
+    }
+
+    .ticket.read {
+      opacity: 0.5;
+      border-left-color: gray;
+    }
+
+    .player {
+      font-weight: bold;
+      color: #00ffff;
+    }
+
+    .btn {
+      background: #00ff99;
+      color: #000;
+      padding: 0.4rem 0.8rem;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+  <h1>📬 Zgłoszenia graczy – Helpop</h1>
+  <div id="tickets"></div>
+
+  <script>
+    fetch('helpop.json')
+      .then(res => res.json())
+      .then(data => {
+        const container = document.getElementById('tickets');
+        data.forEach(ticket => {
+          const div = document.createElement('div');
+          div.className = 'ticket' + (ticket.przeczytane ? ' read' : '');
+          div.innerHTML = `
+            <div><span class="player">${ticket.gracz}</span> zgłasza:</div>
+            <div>"${ticket.wiadomosc}"</div>
+            <div>🕒 ${ticket.data}</div>
+          `;
+          container.appendChild(div);
+        });
+      });
+  </script>
+</body>
+</html>
