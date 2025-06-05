@@ -2,37 +2,12 @@
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <title>HelpOp Panel</title>
-    <style>
-        body { font-family: Arial; padding: 20px; }
-        .message { border: 1px solid #ccc; padding: 10px; margin-bottom: 10px; }
-    </style>
+    <title>Panel administratora</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>HelpOp Panel</h1>
-    <p>Prześlij plik `helpop-log.json`, by zobaczyć wiadomości.</p>
-    <input type="file" id="fileInput">
+    <h1>Panel administratora - HelpOp</h1>
     <div id="messages"></div>
-
-    <script>
-        document.getElementById('fileInput').addEventListener('change', function(event) {
-            const file = event.target.files[0];
-            if (!file) return;
-
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                const content = JSON.parse(e.target.result);
-                const container = document.getElementById('messages');
-                container.innerHTML = '';
-                content.forEach(msg => {
-                    const div = document.createElement('div');
-                    div.className = 'message';
-                    div.innerHTML = `<strong>${msg.time}</strong> - <em>${msg.player}</em>: ${msg.message}`;
-                    container.appendChild(div);
-                });
-            };
-            reader.readAsText(file);
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
