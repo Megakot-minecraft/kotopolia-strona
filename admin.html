@@ -1,86 +1,36 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-  <meta charset="UTF-8" />
-  <title>Panel administracyjny - Kotopolia</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #111;
-      color: #fff;
-      margin: 0;
-      padding: 20px;
-    }
-
-    h1 {
-      color: #4CAF50;
-    }
-
-    .entry {
-      background: #222;
-      border: 1px solid #333;
-      border-radius: 10px;
-      padding: 10px;
-      margin-bottom: 10px;
-    }
-
-    .timestamp {
-      font-size: 0.9em;
-      color: #aaa;
-    }
-
-    .player {
-      font-weight: bold;
-      color: #66ccff;
-    }
-
-    .message {
-      margin-top: 5px;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <title>Panel Admina - Helpop</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #111; color: #eee; padding: 20px; }
+        h1 { color: #4CAF50; }
+        .entry { background: #222; padding: 10px; margin-bottom: 10px; border-left: 4px solid #4CAF50; }
+        .timestamp { color: #888; font-size: 0.9em; }
+    </style>
 </head>
 <body>
-  <h1>Panel administratora - Zgłoszenia HelpOp</h1>
-  <div id="log-container">Ładowanie danych...</div>
+    <h1>Panel Admina - Zgłoszenia Helpop</h1>
+    <div id="log-container">Ładowanie logów...</div>
 
-  <script>
-    async function loadLog() {
-      const container = document.getElementById("log-container");
-
-      try {
-        const response = await fetch("helpop-log.json"); // lub pełny URL jeśli online
-        const data = await response.json();
-
-        if (!Array.isArray(data)) {
-          container.innerHTML = "Nieprawidłowy format logów.";
-          return;
-        }
-
-        if (data.length === 0) {
-          container.innerHTML = "Brak zgłoszeń.";
-          return;
-        }
-
-        container.innerHTML = "";
-
-        data.reverse().forEach(entry => {
-          const div = document.createElement("div");
-          div.className = "entry";
-          div.innerHTML = `
-            <div class="timestamp">${entry.timestamp}</div>
-            <div class="player">${entry.player}</div>
-            <div class="message">${entry.message}</div>
-          `;
-          container.appendChild(div);
-        });
-
-      } catch (e) {
-        container.innerHTML = "Błąd podczas ładowania logów.";
-        console.error(e);
-      }
-    }
-
-    loadLog();
-  </script>
+    <script>
+        fetch('helpop-log.json')
+            .then(response => response.json())
+            .then(data => {
+                const container = document.getElementById('log-container');
+                container.innerHTML = '';
+                data.reverse().forEach(entry => {
+                    const div = document.createElement('div');
+                    div.className = 'entry';
+                    div.innerHTML = `<div class="timestamp">${entry.timestamp}</div>
+                                     <strong>${entry.player}</strong>: ${entry.message}`;
+                    container.appendChild(div);
+                });
+            })
+            .catch(err => {
+                document.getElementById('log-container').innerText = 'Błąd wczytywania logów.';
+            });
+    </script>
 </body>
 </html>
