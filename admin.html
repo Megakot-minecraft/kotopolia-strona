@@ -1,13 +1,75 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-    <meta charset="UTF-8">
-    <title>Panel administratora</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <title>HelpOp – Panel Admina</title>
+  <style>
+    body {
+      background-color: #1b1b1b;
+      color: #f2f2f2;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    h1 {
+      color: #00ff80;
+    }
+
+    .log-entry {
+      background: #2e2e2e;
+      border: 1px solid #00ff80;
+      border-radius: 8px;
+      padding: 1rem;
+      margin: 1rem auto;
+      max-width: 600px;
+      text-align: left;
+    }
+
+    .timestamp {
+      color: #999;
+      font-size: 0.9em;
+    }
+
+    .player {
+      color: #00ffff;
+      font-weight: bold;
+    }
+  </style>
 </head>
 <body>
-    <h1>Panel administratora - HelpOp</h1>
-    <div id="messages"></div>
-    <script src="script.js"></script>
+  <h1>📬 HelpOp – Panel Admina</h1>
+  <div id="logs">Ładowanie logów...</div>
+
+  <script>
+    // Zmień poniższy URL na ścieżkę do Twojego pliku JSON w GitHub Pages
+    const jsonUrl = 'https://twoja-nazwa.github.io/helpop-log.json';
+
+    fetch(jsonUrl)
+      .then(res => res.json())
+      .then(data => {
+        const container = document.getElementById('logs');
+        container.innerHTML = '';
+
+        if (data.length === 0) {
+          container.innerHTML = '<p>Brak zgłoszeń.</p>';
+          return;
+        }
+
+        data.reverse().forEach(entry => {
+          const div = document.createElement('div');
+          div.className = 'log-entry';
+          div.innerHTML = `
+            <div class="timestamp">${entry.timestamp}</div>
+            <div class="player">${entry.player}</div>
+            <div class="message">${entry.message}</div>
+          `;
+          container.appendChild(div);
+        });
+      })
+      .catch(error => {
+        document.getElementById('logs').innerHTML = 'Błąd wczytywania danych: ' + error;
+      });
+  </script>
 </body>
 </html>
